@@ -1,5 +1,4 @@
 require "rigor_logger/version"
-
-module RigorLogger
-  # Your code goes here...
-end
+require 'rigor_logger/base'
+require 'rigor_logger/event'
+require 'rigor_logger/metric'
