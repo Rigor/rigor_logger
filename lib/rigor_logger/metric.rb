@@ -26,10 +26,10 @@ module RigorLogger
     attr_reader :name, :value, :options, :client, :server_host, :server_port
 
     def initialize name, options={}
-      @server_host = options[:server] ? options[:server][:host] : 'localhost'
-      @server_port = options[:server] ? options[:server][:port] : 8125
-      @client = Statsd.new(@host, @port)
-      @value = options[:value]
+      @server_host = options[:server_host] || RigorLogger.config[:server_host]
+      @server_port = options[:server_port] || RigorLogger.config[:server_port]
+      @client      = Statsd.new(@server_host, @server_port)
+      @value       = options[:value]
       super
     end
 

@@ -8,10 +8,11 @@ module RigorLogger
     attr_reader :environment, :host, :name, :options
 
     def initialize name, options={}
-      @environment = options[:environment] || 'development'
-      @host = options[:host] || Socket.gethostname
-      @name = name
-      @options = set_options(options)
+      raise(ConfigurationError, 'Please provide an API key!') unless RigorLogger.config[:api_key]
+      @host        = options[:host] || RigorLogger.config[:host]
+      @environment = options[:environment] || RigorLogger.config[:environment]
+      @name        = name
+      @options     = set_options(options)
     end
 
     protected
@@ -22,7 +23,7 @@ module RigorLogger
     end
 
     def default_tags
-      ["environment:#{@environment}", "host:#{@host}"]
+      RigorLogger.config[:default_tags].map {|tag| "#{tag}:#{self.send(tag)}"}
     end
 
     def set_options options
