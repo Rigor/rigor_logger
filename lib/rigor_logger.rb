@@ -9,6 +9,7 @@ module RigorLogger
     :host         => Socket.gethostname,
     :environment  => 'development',
     :server_host  => 'localhost',
+    :app          => nil,
     :server_port  => 8125,
     :default_tags => [:environment, :host]
   }
