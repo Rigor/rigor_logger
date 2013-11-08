@@ -18,6 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
+### Configuration
+Configure your API key to send to DataDog. For Rails, this could go in ```config/initializers/rigor_logger.rb```
+```ruby
+RigorLogger.config.merge! :api_key      => 'my-datadog-apikey', # required
+                          # hostname tag (Socket.gethostname default)
+                          :host         => 'hostname',          
+                          # the server running dogstatsd (localhost default)
+                          :server_host  => 'myserver.com',      
+                          # the port for dogstatsd server (8125 default)
+                          :server_port  => 1234,
+                          # an environment tag ('development' default)
+                          :environment  => Rails.env,
+                          # an app tag (nil default)
+                          :app          => 'my.app.com',
+                          # what tags to include by default
+                          :default_tags => [:environment, :host, :app]
+```
+
 ### Metrics
 ```ruby
 # create a metric
