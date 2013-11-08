@@ -5,12 +5,13 @@ require 'dogapi'
 module RigorLogger
 
   class Base
-    attr_reader :environment, :host, :name, :options
+    attr_reader :environment, :host, :app, :name, :options
 
     def initialize name, options={}
       raise(ConfigurationError, 'Please provide an API key!') unless RigorLogger.config[:api_key]
       @host        = options[:host] || RigorLogger.config[:host]
       @environment = options[:environment] || RigorLogger.config[:environment]
+      @app         = options[:app] || RigorLogger.config[:app]
       @name        = name
       @options     = set_options(options)
     end
